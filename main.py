@@ -26,15 +26,25 @@ class Window(Tk):
 		testPerm = self.testEntry.get()
 		givenPermissions = self.permissionEntry.get("1.0", "end-1c").split("\n")
 
+		# The algorithm: 
+		"""
+		if perm == test {return true}
+		if perm.endsWith("*") {
+			if(perm[0:-1] == testPerm[0:len(perm)-1]) {return true}
+			
+		}
+
+		"""
 		for perm in givenPermissions:
 			if(perm == testPerm):
 				print(True)
 				return
 			
 			if(perm[-1] == "*"):
-				split = perm.split(".")[0:-1]
-				testSplit = testPerm.split(".")[0:len(split)]
-				if(testSplit == split):
+				if(perm[0:-1] == testPerm[0:len(perm)-1]):
+					print(True)
+					return
+				if(perm.split(".")[0:-1] == testPerm.split(".")):
 					print(True)
 					return
 		print(False)
