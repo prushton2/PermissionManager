@@ -28,26 +28,27 @@ class Window(Tk):
 
 		# The algorithm: 
 		"""
-		if perm == test {return true}
+		if perm == test {return true} //if they are equal, its allowed
 		if perm.endsWith("*") {
-			if(perm[0:-1] == testPerm[0:len(perm)-1]) {return true}
-			
+			if(perm[0:-1] == testPerm[0:len(perm)-1]) {return true} //for allowing subpermissions when the user has x.*
+			if(perm.split(".")[0:-1] == testPerm.split(".")) {reuturn true} //for allowing same level permissions when user has x.* (x.* allows x)
 		}
 
 		"""
 		for perm in givenPermissions:
 			if(perm == testPerm):
-				print(True)
-				return
+				print("Passed on Case 0")
+				return True
 			
 			if(perm[-1] == "*"):
 				if(perm[0:-1] == testPerm[0:len(perm)-1]):
-					print(True)
-					return
+					print("Passed on Case 1")
+					return True
 				if(perm.split(".")[0:-1] == testPerm.split(".")):
-					print(True)
-					return
-		print(False)
+					print("Passed on Case 2")
+					return True
+		print("Failed all Cases")
+		return False
 
 root = Window()
 root.mainloop()
